@@ -9,7 +9,7 @@ def normPath(path:str)->str:
     return os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
 
 def isMusicDir(path : str)->bool:
-    has_image_file=False@
+    has_image_file=False
     has_audio_file=False
     if os.path.isdir(path):
         has_image_file=any("."+ext in filename for filename in os.listdir(path) for ext in image_ext)
@@ -20,11 +20,13 @@ def isMusicDir(path : str)->bool:
     
 def normDirName(path:str):
     dir_files=os.listdir(path)
+    parent_dir_path=os.path.abspath(os.path.join(path, os.pardir))
     def getArbitraryAudioFile(path:str)->str:
         for filename in dir_files:
             for ext in audio_ext:
                 if "."+ext in filename:
                     return filename
+    os.replace(path,os.path.join(parent_dir_path,getArbitraryAudioFile))
     
             
 
