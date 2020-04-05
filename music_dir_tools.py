@@ -19,14 +19,18 @@ def isMusicDir(path : str)->bool:
         return False
     
 def normDirName(path:str):
-    dir_files=os.listdir(path)
-    parent_dir_path=os.path.abspath(os.path.join(path, os.pardir))
-    def getArbitraryAudioFile(path:str)->str:
-        for filename in dir_files:
+    def getArbitraryAudioFile(path:str)->taglib.File:
+        for filename in os.listdir(path):
             for ext in audio_ext:
                 if "."+ext in filename:
-                    return filename
-    os.replace(path,os.path.join(parent_dir_path,getArbitraryAudioFile))
+                    return taglib.File(os.path.join(path,filename))
+    parent_dir_path=os.path.abspath(os.path.join(path, os.pardir))
+    arbitrary_audio_file=getArbitraryAudioFile(path).tags
+    new_dir_path=os.path.join(parent_dir_path,arbitrary_audio_file["ALBUMARTIST"][0]+" - "+arbitrary_audio_file["ALBUM"][0])
+    os.replace(path,new_dir_path)
+    
+
+
     
             
 

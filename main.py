@@ -1,5 +1,5 @@
-import subprocess
 import music_dir_tools
 
-path=music_dir_tools.normPath("/home/brocolio/Music/Lossless/revisado/(2013) Präparat")
-print(music_dir_tools.isMusicDir(path))
+path=music_dir_tools.normPath("/home/brocolio/2004 - We Love  AKIBA-POP !!")
+music_dir_tools.normDirName(path)
+
